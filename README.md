@@ -3,7 +3,7 @@
 ![light-thumb](https://github.com/user-attachments/assets/b68dc89e-2af7-4b1e-b0fa-7336c361f63b)
 
 **Author:** The French Monkey (TFMSTYLE)  
-**Version:** 1.2.3  
+**Version:** 1.2.5  
 
 ---
 
@@ -210,3 +210,21 @@ Selecting a preset automatically applies its stored lighting configuration.
 - Save frequently used configurations as **Presets** for rapid scene setup.  
 - The generated Light Generator is a parent object — moving or rotating it moves all lights together.  
 - Each light remains a fully editable Blender object with standard lighting properties and materials.
+
+---
+
+## Install
+
+Needs Blender 4.2 or later. In Blender open Edit > Preferences > Get Extensions and search for Light Generator.
+
+To build the zip yourself, run this in the repo folder:
+
+```bash
+blender --command extension build
+```
+
+---
+
+## License
+
+GPL 3.0 or later. See [LICENSE](LICENSE).

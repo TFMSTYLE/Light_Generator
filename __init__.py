@@ -1,7 +1,10 @@
+# SPDX-FileCopyrightText: 2025-2026 The French Monkey
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 bl_info = {
     "name": "Light",
     "author": "The French Monkey",
-    "version": (1, 2, 4),
+    "version": (1, 2, 5),
     "blender": (4, 2, 0),
     "location": "Sidebar > Light",
     "description": "Generate lights with advanced distribution",

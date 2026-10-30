@@ -1,13 +1,17 @@
 schema_version = "1.0.0"
 
-id = "light"
-version = "1.2.4"
-name = "TFMSTYLE - Light"
+id = "light_generator"
+version = "1.2.5"
+name = "Light Generator"
 tagline = "Generate lights with advanced distribution"
+tags = ["3D View", "Lighting"]
 maintainer = "The French Monkey"
 license = ["SPDX:GPL-3.0-or-later"]
+copyright = ["2025-2026 The French Monkey"]
 type = "add-on"
 blender_version_min = "4.2.0"
 
 website = "https://tfmstyle.com"
 
+[build]
+paths = ["__init__.py", "LICENSE"]
