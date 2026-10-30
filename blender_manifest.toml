@@ -1,0 +1,13 @@
+schema_version = "1.0.0"
+
+id = "light"
+version = "1.2.4"
+name = "TFMSTYLE - Light"
+tagline = "Generate lights with advanced distribution"
+maintainer = "The French Monkey"
+license = ["SPDX:GPL-3.0-or-later"]
+type = "add-on"
+blender_version_min = "4.2.0"
+
+website = "https://tfmstyle.com"
+
