@@ -4,7 +4,7 @@
 bl_info = {
     "name": "Light",
     "author": "The French Monkey",
-    "version": (1, 2, 5),
+    "version": (1, 2, 6),
     "blender": (4, 2, 0),
     "location": "Sidebar > Light",
     "description": "Generate lights with advanced distribution",
@@ -18,6 +18,11 @@ import math
 import os
 import json
 from mathutils import Vector, Euler
+
+try:
+    from . import relay_updater
+except ImportError:  # the Addon Collection has its own updates
+    relay_updater = None
 
 GENERATOR_NAME = "LightGenerator"
 
@@ -507,6 +512,8 @@ class VIEW3D_PT_light_generator(bpy.types.Panel):
     bl_category = "Light"
 
     def draw(self, context):
+        if relay_updater:
+            relay_updater.draw(self.layout)
         layout = self.layout
         s = context.scene.light_gen_settings
         active_gen = get_active_light_generator(context)
@@ -614,11 +621,15 @@ classes = (
 )
 
 def register():
+    if relay_updater:
+        relay_updater.register("blender-light")
     for cls in classes:
         bpy.utils.register_class(cls)
     bpy.types.Scene.light_gen_settings = bpy.props.PointerProperty(type=LightGenSettings)
 
 def unregister():
+    if relay_updater:
+        relay_updater.unregister()
     for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
     if hasattr(bpy.types.Scene, "light_gen_settings"):
