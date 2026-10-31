@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.7
+
+- Generate Lights and Delete Lights now have their own undo step, so Ctrl+Z takes back only that action. Saving a preset no longer fails on a damaged preset file
+
 ## 1.2.6
 
 - Added update checks: when a new version is published on Relay, an Update button appears in this panel. Nothing goes online when Allow Online Access is off, and Blender store installs keep updating through the store

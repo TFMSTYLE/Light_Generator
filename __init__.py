@@ -4,7 +4,7 @@
 bl_info = {
     "name": "Light",
     "author": "The French Monkey",
-    "version": (1, 2, 6),
+    "version": (1, 2, 7),
     "blender": (4, 2, 0),
     "location": "Sidebar > Light",
     "description": "Generate lights with advanced distribution",
@@ -148,13 +148,19 @@ def compute_position(index, total, target, distance, distance_randomizer, z_offs
 # Presets Functions
 # ------------------------------------------------------------------------
 
+def clean_presets(data):
+    """Only well formed presets, so a hand edited file cannot break saving."""
+    if not isinstance(data, list):
+        return []
+    return [p for p in data if isinstance(p, dict) and "name" in p]
+
 def save_preset_to_file(preset_dict):
     presets = []
     preset_file = get_preset_file()
     if os.path.exists(preset_file):
         with open(preset_file, "r") as f:
             try:
-                presets = json.load(f)
+                presets = clean_presets(json.load(f))
             except:
                 presets = []
 
@@ -170,7 +176,7 @@ def get_available_presets():
         return []
     with open(preset_file, "r") as f:
         try:
-            presets = json.load(f)
+            presets = clean_presets(json.load(f))
             return [p['name'] for p in presets]
         except:
             return []
@@ -194,7 +200,7 @@ def update_lights(context, force_generator=None):
 
         with open(preset_file, "r") as f:
             try:
-                presets = json.load(f)
+                presets = clean_presets(json.load(f))
             except Exception:
                 return
 
@@ -333,6 +339,7 @@ class LIGHT_OT_select_preset(bpy.types.Operator):
 class LIGHT_OT_generate_lights(bpy.types.Operator):
     bl_idname = "light.generate_lights"
     bl_label = "Generate Lights"
+    bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
         generator = get_active_light_generator(context)
@@ -351,6 +358,7 @@ class LIGHT_OT_generate_lights(bpy.types.Operator):
 class LIGHT_OT_clear_lights(bpy.types.Operator):
     bl_idname = "light.clear_lights"
     bl_label = "Delete Lights"
+    bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
         generator = get_active_light_generator(context)
@@ -428,7 +436,7 @@ class LIGHT_OT_delete_preset(bpy.types.Operator):
 
         try:
             with open(preset_file, "r") as f:
-                presets = json.load(f)
+                presets = clean_presets(json.load(f))
         except Exception:
             self.report({'ERROR'}, "Failed to read presets file.")
             return {'CANCELLED'}
