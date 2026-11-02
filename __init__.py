@@ -4,7 +4,7 @@
 bl_info = {
     "name": "Light",
     "author": "The French Monkey",
-    "version": (1, 2, 7),
+    "version": (1, 2, 8),
     "blender": (4, 2, 0),
     "location": "Sidebar > Light",
     "description": "Generate lights with advanced distribution",
